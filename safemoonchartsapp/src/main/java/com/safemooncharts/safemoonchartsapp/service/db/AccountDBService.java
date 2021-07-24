@@ -20,7 +20,7 @@ public class AccountDBService {
 			System.out.println("Registration successful");
 			return true;
 		}
-		System.out.println("Registration failed");
+		System.out.println("Registration unsuccessful");
 		return false;
 	}	
 }
