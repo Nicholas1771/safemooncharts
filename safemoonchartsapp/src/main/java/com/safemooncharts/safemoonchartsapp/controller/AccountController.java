@@ -21,4 +21,13 @@ public class AccountController {
 		accountDBService.register(account, confirmPassword);
 		return "index";
 	}
+	
+	@RequestMapping("/loginAccount")
+	public String loginAccount(@RequestParam String email, @RequestParam String password, Model model) {
+		if (accountDBService.isCorrectCredentials(email, password)) {
+			Account account = accountDBService.getAccount(email);
+			model.addAttribute("account", account);
+		}
+		return "index";
+	}
 }

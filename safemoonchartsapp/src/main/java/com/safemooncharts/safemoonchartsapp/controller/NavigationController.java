@@ -14,28 +14,28 @@ public class NavigationController {
 	@Autowired
 	private ApplicationContext context;
 	
-	@RequestMapping({"/", "/goToIndex"})
+	@RequestMapping({"/", "/Index"})
 	public String goToIndex() {
 		return "index";
 	}
 	
-	@RequestMapping("/goToSignUp")
+	@RequestMapping("/SignUp")
 	public String goToSignUp(Model model) {
 		model.addAttribute("account", context.getBean("account", Account.class));
 		return "signup";
 	}
 	
-	@RequestMapping("/goToLogin")
+	@RequestMapping("/Login")
 	public String goToLogin() {
 		return "login";
 	}
 	
-	@RequestMapping("/goToWallet")
+	@RequestMapping("/Wallet")
 	public String goToWallet() {
 		return "wallet";
 	}
 	
-	@RequestMapping("/goToSafemoon")
+	@RequestMapping("/Safemoon")
 	public String goToSafemoon() {
 		return "safemoon";
 	}
