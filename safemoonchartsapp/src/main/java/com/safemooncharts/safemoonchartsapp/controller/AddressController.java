@@ -1,6 +1,8 @@
 package com.safemooncharts.safemoonchartsapp.controller;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +21,20 @@ public class AddressController {
 	@RequestMapping("/SubmitAddress")
 	public String submitAddress(@RequestParam String address, Model model) {
 		String safemoonBalance = restService.getSafemoonBalanceByAddress(address);
-		String transactions = restService.getNormalTransactionsByAddress(address);
+		String pSafemoonBalance = restService.getPSafemoonBalanceByAddress(address);
+		DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
+		double sum = 0.0;
+		try {
+			sum = decimalFormat.parse(safemoonBalance).doubleValue() + decimalFormat.parse(pSafemoonBalance).doubleValue();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String totalSafemoonBalance = decimalFormat.format(BigDecimal.valueOf(sum));
 		model.addAttribute("address", address);
 		model.addAttribute("safemoonBalance", safemoonBalance);
-		model.addAttribute("transactions", transactions);
+		model.addAttribute("pSafemoonBalance", pSafemoonBalance);
+		model.addAttribute("totalSafemoonBalance", totalSafemoonBalance);
 		return "wallet";
-	}
-	
+	}	
 }
