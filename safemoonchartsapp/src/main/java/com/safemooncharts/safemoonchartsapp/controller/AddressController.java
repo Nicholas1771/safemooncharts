@@ -1,5 +1,7 @@
 package com.safemooncharts.safemoonchartsapp.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,10 @@ public class AddressController {
 	
 	@RequestMapping("/SubmitAddress")
 	public String submitAddress(@RequestParam String address, Model model) {
-		String bnbBalance = restService.getBnbBalanceByAddress(address);
+		String safemoonBalance = restService.getSafemoonBalanceByAddress(address);
 		String transactions = restService.getNormalTransactionsByAddress(address);
 		model.addAttribute("address", address);
-		model.addAttribute("bnbBalance", bnbBalance);
+		model.addAttribute("safemoonBalance", safemoonBalance);
 		model.addAttribute("transactions", transactions);
 		return "wallet";
 	}
