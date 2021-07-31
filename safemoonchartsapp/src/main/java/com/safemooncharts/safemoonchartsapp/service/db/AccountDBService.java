@@ -1,5 +1,6 @@
 package com.safemooncharts.safemoonchartsapp.service.db;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,9 @@ public class AccountDBService {
 		} else {
 			throw new AccountNotFoundException("Account with email " + email + " not found"); 
 		}
+	}
+
+	public List<Account> findAll() {
+		return accountRepository.findAll();
 	}
 }

@@ -26,13 +26,16 @@ public class SafemoonTransaction {
 	}
 
 	public void setValue(String value) {
-		String valueString = value.substring(0, value.length() - 9) + "."
-				+ value.substring(value.length() - 8);
-		BigDecimal bigDecimalValue = new BigDecimal(valueString);
-		DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
-		this.value = decimalFormat.format(bigDecimalValue);
+		if (value.length() >= 9) {
+			String valueString = value.substring(0, value.length() - 9) + "." + value.substring(value.length() - 8);
+			BigDecimal bigDecimalValue = new BigDecimal(valueString);
+			DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
+			this.value = decimalFormat.format(bigDecimalValue);
+		} else {
+			this.value = value;
+		}
 	}
-	
+
 	public void setValueFormatted(String value) {
 		this.value = value;
 	}
