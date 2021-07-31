@@ -18,7 +18,7 @@ import com.safemooncharts.safemoonchartsapp.model.SafemoonTransaction;
 import com.safemooncharts.safemoonchartsapp.service.api.RestService;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:8080", "http://www.safemooncharts.ca/"})
+@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:4200", "http://www.safemooncharts.ca/"})
 public class AddressController {
 
 	@Autowired
