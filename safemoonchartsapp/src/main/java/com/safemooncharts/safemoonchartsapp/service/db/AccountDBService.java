@@ -16,32 +16,20 @@ public class AccountDBService {
 	@Autowired
 	private AccountRepository accountRepository;
 
-	public boolean register(Account account, String confirmPass) {
-		boolean passMatch = account.getPassword().equals(confirmPass);
-		boolean emailExists = accountRepository.findByEmailIgnoreCase(account.getEmail()).isPresent();
-		if (passMatch && !emailExists) {
-			accountRepository.save(account);
-			System.out.println("Registration successful");
-			return true;
-		}
-		System.out.println("Registration unsuccessful");
-		return false;
+	public Account register(Account account) {
+		return accountRepository.save(account);
 	}
 
-	public boolean isCorrectCredentials(String email, String password) {
+	public String login (String email, String password) {
 		Optional<Account> account = accountRepository.findByEmailIgnoreCase(email);
 		if (account.isPresent()) {
-			System.out.println("Account exists");
 			if (account.get().getPassword().equals(password)) {
-				System.out.println("Correct password");
-				return true;
+				return "success";
 			} else {
-				System.out.println("Incorrect password");
-				return false;
+				return "Incorrect password";
 			}
 		} else {
-			System.out.println("Account does not exist");
-			return false;
+			return "Account does not exist";
 		}
 	}
 
@@ -54,7 +42,7 @@ public class AccountDBService {
 		}
 	}
 
-	public List<Account> findAll() {
+	public List<Account> getAccounts() {
 		return accountRepository.findAll();
 	}
 }

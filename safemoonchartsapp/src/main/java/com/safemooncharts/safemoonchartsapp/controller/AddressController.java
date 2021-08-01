@@ -24,34 +24,8 @@ public class AddressController {
 	@Autowired
 	private RestService restService;
 
-	@RequestMapping("/SubmitAddress")
-	public String submitAddress(@RequestParam String address, Model model) {
-		String safemoonBalance = restService.getSafemoonBalanceByAddress(address);
-		String pSafemoonBalance = restService.getPSafemoonBalanceByAddress(address);
-		List<SafemoonTransaction> safemoonTransactions = restService.getSafemoonTransactionsByAddress(address)
-				.getResult();
-		DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
-		double sum = 0.0;
-		try {
-			sum = decimalFormat.parse(safemoonBalance).doubleValue()
-					+ decimalFormat.parse(pSafemoonBalance).doubleValue();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String totalSafemoonBalance = decimalFormat.format(BigDecimal.valueOf(sum));
-		model.addAttribute("address", address);
-		model.addAttribute("safemoonBalance", safemoonBalance);
-		model.addAttribute("pSafemoonBalance", pSafemoonBalance);
-		model.addAttribute("totalSafemoonBalance", totalSafemoonBalance);
-		model.addAttribute("safemoonTransactions", safemoonTransactions);
-		model.addAttribute("reflections", getTotalReflections(safemoonTransactions, safemoonBalance));
-		return "wallet";
-	}
-
 	private String getTotalReflections(List<SafemoonTransaction> safemoonTransactions, String balance) {
 		double receivedSentDifference = 0.0;
-		double totalReflections = 0.0;
 		double sBalance = 0.0;
 		DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
 		try {

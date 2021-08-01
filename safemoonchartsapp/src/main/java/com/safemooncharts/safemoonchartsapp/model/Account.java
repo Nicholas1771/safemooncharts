@@ -5,9 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.stereotype.Component;
-
-@Component
 @Entity
 public class Account {
 
@@ -16,7 +13,7 @@ public class Account {
 	private int id;
 	private String email;
 	private String password;
-
+	
 	public int getId() {
 		return id;
 	}
